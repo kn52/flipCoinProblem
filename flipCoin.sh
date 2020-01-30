@@ -57,6 +57,13 @@ do
 			percentage
 			echo "${flipCoin[@]}"		
 			;;
+		3)
+			outcome
+			echo "${!flipCoin[@]}"	
+			echo "${flipCoin[@]}"	
+			percentage
+			echo "${flipCoin[@]}"		
+			;;
 		*)
 			echo "Error"
 	esac
