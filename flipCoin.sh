@@ -1,10 +1,10 @@
-#!/bin/bash
 declare -A flipCoin
 echo "Welcome to flip coin problem"
 isEmpty()
 {
 	flipCoin=( )
 }
+
 dictionary()
 {
 	flipCoin[$str]=$((flipCoin[$str]+1))
@@ -14,15 +14,19 @@ outcome()
 	for i in `seq 1 $flips`
 	do
 		str=""
-              	if [ $((RANDOM%2)) == 1 ]
-              	then
-                      	       	str="H"
-              	else
-                       	       	str="T"
-       		fi
-       		dictionary
+		for j in `seq 1 $coins`
+       		do
+              		if [ $((RANDOM%2)) == 1 ]
+              		then
+                      	       	str=$str"H"
+              		else
+                       	       	str=$str"T"
+              		fi
+               	done
+        	dictionary
 	done
 }
+
 percentage()
 {
 	for i in ${!flipCoin[@]}
@@ -32,10 +36,29 @@ percentage()
 	done
 }
 
-read -p "Enter no of flips: " flips
-isEmpty
-outcome
-echo "${!flipCoin[@]}"
-echo "${flipCoin[@]}"
-percentage	
-echo "${flipCoin[@]}"
+choice="y"
+while [ "$choice" == "y" ] || [ "$choice" == "Y" ] 
+do
+	read -p "Number of Flips: " flips
+	read -p "Number of Coins:" coins
+	isEmpty
+	case $coins in
+		1)
+			outcome
+			echo "${!flipCoin[@]}"
+			echo "${flipCoin[@]}"
+			percentage	
+			echo "${flipCoin[@]}"
+			;;
+		2)
+			outcome
+			echo "${!flipCoin[@]}"	
+			echo "${flipCoin[@]}"	
+			percentage
+			echo "${flipCoin[@]}"		
+			;;
+		*)
+			echo "Error"
+	esac
+	read -p "Do you want to continue [y/n]: " choice
+done
