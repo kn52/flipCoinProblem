@@ -1,3 +1,4 @@
+#!/bin/bash
 declare -A flipCoin
 echo "Welcome to flip coin problem"
 isEmpty()
@@ -36,6 +37,14 @@ percentage()
 	done
 }
 
+winningCombination()
+{
+	for i in ${!flipCoin[@]}
+	do
+		echo $i ${flipCoin["$i"]}
+	done | sort -k2 -rn | head -n 1
+}
+
 choice="y"
 while [ "$choice" == "y" ] || [ "$choice" == "Y" ] 
 do
@@ -47,22 +56,25 @@ do
 			outcome
 			echo "${!flipCoin[@]}"
 			echo "${flipCoin[@]}"
-			percentage	
-			echo "${flipCoin[@]}"
+			percentage
+			echo "${flipCoin[@]}"	
+			winningCombination
 			;;
 		2)
 			outcome
 			echo "${!flipCoin[@]}"	
 			echo "${flipCoin[@]}"	
 			percentage
-			echo "${flipCoin[@]}"		
+			echo "${flipCoin[@]}"			
+			winningCombination		
 			;;
 		3)
 			outcome
 			echo "${!flipCoin[@]}"	
 			echo "${flipCoin[@]}"	
 			percentage
-			echo "${flipCoin[@]}"		
+			echo "${flipCoin[@]}"
+			winningCombination		
 			;;
 		*)
 			echo "Error"
